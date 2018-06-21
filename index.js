@@ -1,6 +1,14 @@
-var TIMEOUT_IN_SECS = 3 * 60
+var TIMEOUT_IN_SECS = 3*60
 var TEMPLATE = '<h1><span class="js-timer-minutes">00</span>:<span class="js-timer-seconds">00</span></h1>'
-
+var TIMEOUT_TO_ALERT = 30*1000
+var MOTIVATION_QUOTES = [
+  "Всякая работа трудна до времени, пока ее не полюбишь, а потом она возбуждает и становится легче",
+  "Гениальность может оказаться лишь мимолетным шансом. Только работа и воля могут дать ей жизнь и обратить ее в славу",
+  "Постарайтесь получить то, что любите, иначе придется полюбить то, что получили",
+  "Работа, которую мы делаем охотно, исцеляет боли",
+  "Делай что можешь, с тем, что у тебя есть, там, где ты находишься",
+  "Кто хочет – ищет возможности. Кто не хочет – ищет причины"
+]
 function padZero(number){
   return ("00" + String(number)).slice(-2);
 }
@@ -56,7 +64,8 @@ class TimerWidget{
     // adds HTML tag to current page
     this.timerContainer = document.createElement('div')
 
-    this.timerContainer.setAttribute("style", "height: 100px;")
+    this.timerContainer.setAttribute("style", "position: fixed; padding: 5px; width: 80px; left: 20px; top: 10px; z-index:1; border:2px; background:#65a3be; border-radius: 20px; border-width:50px")
+
     this.timerContainer.innerHTML = TEMPLATE
 
     rootTag.insertBefore(this.timerContainer, rootTag.firstChild)
@@ -87,10 +96,24 @@ function main(){
   var intervalId = null
 
   timerWiget.mount(document.body)
-
+  function getRandomQuotes(MOTIVATION_QUOTES){
+    var quote = MOTIVATION_QUOTES[Math.floor(Math.random() * MOTIVATION_QUOTES.length)];
+	  return quote
+  }
   function handleIntervalTick(){
     var secsLeft = timer.calculateSecsLeft()
     timerWiget.update(secsLeft)
+    if (secsLeft === 0){
+      timer.stop();
+      timerWiget.unmount();
+      setInterval(
+        function() {
+          window.alert(getRandomQuotes(MOTIVATION_QUOTES))
+        },
+        TIMEOUT_TO_ALERT)
+
+
+    }
   }
 
   function handleVisibilityChange(){
@@ -108,6 +131,7 @@ function main(){
   document.addEventListener("visibilitychange", handleVisibilityChange, false);
   handleVisibilityChange()
 }
+
 
 if (document.readyState === "complete" || document.readyState === "loaded") {
   main();
