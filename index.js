@@ -1,6 +1,6 @@
-var TIMEOUT_IN_SECS = 3*60
-var TEMPLATE = '<h1><span class="js-timer-minutes">00</span>:<span class="js-timer-seconds">00</span></h1>'
-var TIMEOUT_TO_ALERT = 30*1000
+var TIMEOUT_IN_SECS = 3*60;
+var TEMPLATE = '<h1><span class="js-timer-minutes">00</span>:<span class="js-timer-seconds">00</span></h1>';
+var TIMEOUT_TO_ALERT = 30*1000;
 var MOTIVATION_QUOTES = [
   "Всякая работа трудна до времени, пока ее не полюбишь, а потом она возбуждает и становится легче",
   "Гениальность может оказаться лишь мимолетным шансом. Только работа и воля могут дать ей жизнь и обратить ее в славу",
@@ -8,7 +8,7 @@ var MOTIVATION_QUOTES = [
   "Работа, которую мы делаем охотно, исцеляет боли",
   "Делай что можешь, с тем, что у тебя есть, там, где ты находишься",
   "Кто хочет – ищет возможности. Кто не хочет – ищет причины"
-]
+];
 function padZero(number){
   return ("00" + String(number)).slice(-2);
 }
@@ -104,12 +104,12 @@ function main(){
     var secsLeft = timer.calculateSecsLeft()
     timerWiget.update(secsLeft)
     if (secsLeft === 0){
-    timer.stop();
-    timerWiget.unmount();
-    setInterval(
-    function() {
-    window.alert(getRandomQuotes(MOTIVATION_QUOTES))
-    }, TIMEOUT_TO_ALERT)
+      timer.stop();
+      timerWiget.unmount();
+      setInterval(
+        function() {
+          window.alert(getRandomQuotes(MOTIVATION_QUOTES))
+        }, TIMEOUT_TO_ALERT)
 
     }
   }
