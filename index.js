@@ -98,7 +98,7 @@ function main(){
   timerWiget.mount(document.body)
   function getRandomQuotes(MOTIVATION_QUOTES){
     var quote = MOTIVATION_QUOTES[Math.floor(Math.random() * MOTIVATION_QUOTES.length)];
-	  return quote
+    return quote
 
   }
   function handleIntervalTick(){
