@@ -99,6 +99,7 @@ function main(){
   function getRandomQuotes(MOTIVATION_QUOTES){
     var quote = MOTIVATION_QUOTES[Math.floor(Math.random() * MOTIVATION_QUOTES.length)];
 	  return quote
+
   }
   function handleIntervalTick(){
     var secsLeft = timer.calculateSecsLeft()
