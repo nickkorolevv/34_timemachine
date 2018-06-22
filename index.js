@@ -104,14 +104,12 @@ function main(){
     var secsLeft = timer.calculateSecsLeft()
     timerWiget.update(secsLeft)
     if (secsLeft === 0){
-      timer.stop();
-      timerWiget.unmount();
-      setInterval(
-        function() {
-          window.alert(getRandomQuotes(MOTIVATION_QUOTES))
-        },
-        TIMEOUT_TO_ALERT)
-
+    timer.stop();
+    timerWiget.unmount();
+    setInterval(
+    function() {
+    window.alert(getRandomQuotes(MOTIVATION_QUOTES))
+    }, TIMEOUT_TO_ALERT)
 
     }
   }
