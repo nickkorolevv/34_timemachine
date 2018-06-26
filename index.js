@@ -1,4 +1,4 @@
-var TIMEOUT_IN_SECS = 3 * 60;
+var TIMEOUT_IN_SECS = 3 * 5;
 var TEMPLATE = '<h1><span class="js-timer-minutes">00</span>:<span class="js-timer-seconds">00</span></h1>';
 var TIMEOUT_TO_ALERT = 30 * 1000;
 var MOTIVATION_QUOTES = [
@@ -64,7 +64,7 @@ class TimerWidget{
     // adds HTML tag to current page
     this.timerContainer = document.createElement('div')
 
-    this.timerContainer.setAttribute("style", "position: fixed; padding: 5px; width: 80px; left: 20px; top: 10px; z-index:1; border:2px; background:#65a3be; border-radius: 20px; border-width:50px")
+    this.timerContainer.setAttribute("style", "position: fixed; padding: 5px; width: 80px; left: 20px; top: 10px; z-index:9999; border:2px; background:#65a3be; border-radius: 20px; border-width:50px")
 
     this.timerContainer.innerHTML = TEMPLATE
 
@@ -107,10 +107,14 @@ function main(){
     if (secsLeft === 0){
       timer.stop();
       timerWiget.unmount();
+      if (!document.hidden){
       setInterval(
         function() {
           window.alert(getRandomQuotes(MOTIVATION_QUOTES))
-        }, TIMEOUT_TO_ALERT)
+        }, TIMEOUT_TO_ALERT)}
+       else {
+       handleVisibilityChange()
+       }
 
     }
   }
