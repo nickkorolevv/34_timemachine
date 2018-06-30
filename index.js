@@ -1,6 +1,6 @@
 var TIMEOUT_IN_SECS = 3 * 5;
 var TEMPLATE = '<h1><span class="js-timer-minutes">00</span>:<span class="js-timer-seconds">00</span></h1>';
-var TIMEOUT_TO_ALERT = 30 * 1000;
+var TIMEOUT_TO_ALERT = 10;
 var MOTIVATION_QUOTES = [
   'Всякая работа трудна до времени, пока ее не полюбишь, а потом она возбуждает и становится легче',
   'Гениальность может оказаться лишь мимолетным шансом. Только работа и воля могут дать ей жизнь и обратить ее в славу',
@@ -91,9 +91,11 @@ class TimerWidget{
 
 function main(){
 
-  var timer = new Timer(TIMEOUT_IN_SECS)
-  var timerWiget = new TimerWidget()
-  var intervalId = null
+  let timer = new Timer(TIMEOUT_IN_SECS)
+  let timerWiget = new TimerWidget()
+  let intervalId = null
+  let timeOutIntervalId = null
+  let alertTimer = new Timer(TIMEOUT_TO_ALERT)
 
   timerWiget.mount(document.body)
   function getRandomQuotes(MOTIVATION_QUOTES){
@@ -102,30 +104,31 @@ function main(){
 
   }
   function handleIntervalTick(){
-    var secsLeft = timer.calculateSecsLeft()
+    let secsLeft = timer.calculateSecsLeft()
     timerWiget.update(secsLeft)
     if (secsLeft === 0){
       timer.stop();
-      timerWiget.unmount();
-      if (!document.hidden){
-      setInterval(
-        function() {
-          window.alert(getRandomQuotes(MOTIVATION_QUOTES))
-        }, TIMEOUT_TO_ALERT)}
-       else {
-       handleVisibilityChange()
-       }
+      //timerWiget.unmount();
+      alertTimer.start();
+      let secsLeftToAlert = alertTimer.calculateSecsLeft();
+      if (secsLeftToAlert === 0) {
+        alert(getRandomQuotes(MOTIVATION_QUOTES));
+        alertTimer = new Timer(TIMEOUT_TO_ALERT)
+      }
 
     }
   }
 
   function handleVisibilityChange(){
     if (document.hidden) {
-      timer.stop()
+      timer.stop();
+      alertTimer.stop();
       clearInterval(intervalId)
+      clearInterval(timeOutIntervalId)
       intervalId = null
     } else {
       timer.start()
+      alertTimer.start();
       intervalId = intervalId || setInterval(handleIntervalTick, 300)
     }
   }
