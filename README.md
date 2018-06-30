@@ -8,7 +8,7 @@
 Также есть аналоги на другие браузеры, которые можно найти в интернете.
 
 # Быстрый старт
-Вставь [Ссылку](https://rawgit.com/nickkorolevv/34_timemachine/master/index.js) в окно и жми Сохранить
+Вставь [Ссылку](https://cdn.rawgit.com/nickkorolevv/34_timemachine/08f2ca1b/index.js) в окно и жми Сохранить
 
 
 # Цель проекта
