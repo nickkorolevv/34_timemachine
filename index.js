@@ -1,6 +1,6 @@
-var TIMEOUT_IN_SECS = 3 * 5;
+var TIMEOUT_IN_SECS = 3 * 60;
 var TEMPLATE = '<h1><span class="js-timer-minutes">00</span>:<span class="js-timer-seconds">00</span></h1>';
-var TIMEOUT_TO_ALERT = 10;
+var TIMEOUT_TO_ALERT = 30*1000;
 var MOTIVATION_QUOTES = [
   'Всякая работа трудна до времени, пока ее не полюбишь, а потом она возбуждает и становится легче',
   'Гениальность может оказаться лишь мимолетным шансом. Только работа и воля могут дать ей жизнь и обратить ее в славу',
