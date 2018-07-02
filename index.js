@@ -128,7 +128,9 @@ function main(){
       intervalId = null
     } else {
       timer.start()
+      if (timer.isOut()) {
       alertTimer.start();
+      }
       intervalId = intervalId || setInterval(handleIntervalTick, 300)
     }
   }
